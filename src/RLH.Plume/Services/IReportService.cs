@@ -1,5 +1,5 @@
-﻿using RLH.Plume.Aggregates;
-using RLH.Results;
+﻿using RLH.Plume.Entities;
+using RLH.Plume.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +10,9 @@ namespace RLH.Plume.Services
 {
     public interface IReportService
     {
-        Task<ResultOf<MultiDayReport>> GetMultiDayReport(DateTimeOffset dateFrom, DateTimeOffset dateTo);
 
-        Task<ResultOf<DailyReport>> GetDailyReport(DateTimeOffset date);
+        public IDayReport GenerateDailyReport(DateTime date,IEnumerable<Measurement> measurements, int PM10HourlyThreshold, int PM25HourlyThreshold);
+
+        public IMultiDayReport GenerateMultiDayReport(DateTime startDate,DateTime endDate,IEnumerable<Measurement> measurements, int PM10HourlyThreshold, int PM25HourlyThreshold);
     }
 }

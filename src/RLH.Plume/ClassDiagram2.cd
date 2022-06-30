@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="RLH.Plume.Aggregates.MeasurementGroup">
+    <Position X="9.5" Y="2.25" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>gAACAAAAAAAAAAABAIAAAEAEkAAAAQAQAAIAAAAAACA=</HashCode>
+      <FileName>Aggregates\MeasurementGroup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RLH.Plume.Entities.Measurement">
+    <Position X="1.5" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAgwAAAxACAgAAAAAAACAIAAAAAABAAAAAAAAAAAABA=</HashCode>
+      <FileName>Entities\Measurement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="RLH.Plume.Aggregates.IMeasurementGroup">
+    <Position X="5.25" Y="2.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAABAIAAAEAEgAAAAQAQAAIAAAAAACA=</HashCode>
+      <FileName>Aggregates\IMeasurementGroup.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="RLH.Plume.Enums.Interval">
+    <Position X="1.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAhAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Enums\Interval.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

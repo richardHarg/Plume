@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="NameAndType">
+  <Interface Name="RLH.Plume.Aggregates.IReport">
+    <Position X="5.25" Y="2.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAEAAA=</HashCode>
+      <FileName>Aggregates\IReport.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RLH.Plume.Aggregates.IMeanReport&lt;T&gt;">
+    <Position X="3" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAEgAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Aggregates\IMeanReport.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RLH.Plume.Aggregates.IMultiDayReport">
+    <Position X="5.25" Y="4.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Aggregates\IMultiDayReport.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="RLH.Plume.Aggregates.IThresholdReport&lt;T&gt;">
+    <Position X="8.5" Y="4.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAEAAAAAAAAAAAAAAAAAgAAEAAAAA=</HashCode>
+      <FileName>Aggregates\IThresholdReport.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
