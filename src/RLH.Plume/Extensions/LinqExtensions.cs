@@ -1,21 +1,10 @@
-﻿using RLH.Plume.Aggregates;
-using RLH.Plume.Entities;
-using RLH.Plume.Enums;
+﻿
+using RLH.Plume.Core.Entities;
 
 namespace RLH.Plume.Extensions
 {
     public static class LinqExtensions
     {
-
-
-
-
-
-
-
-
-
-
         public static IEnumerable<IGrouping<DateTimeOffset, Measurement>> GroupByInterval(this IEnumerable<Measurement> collection, TimeSpan timeSpan)
         {
             return collection.GroupBy(x =>

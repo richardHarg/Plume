@@ -1,33 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RLH.Plume.Core.Services;
-using RLH.Plume.Services;
+﻿using RLH.Plume.HighCharts.Services;
 
-namespace RLH.Plume.Factories
+namespace RLH.Plume.HighCharts.Factories
 {
-    public class MeasurementServiceFactory : IDisposable
+    public sealed class HighChartServiceFactory : IDisposable
     {
         private bool disposedValue;
 
-        public IMeasurementService GetMeasurementService(int version = 1)
+        public IHighChartService GetService(int version = 1)
         {
-            var context = new PlumeContextFactory().CreateDbContext();
-
             switch (version)
             {
-                default: return new MeasurementService(context);
+                default: return new HighChartService();
             }
         }
 
-
-
-
-
-
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (!disposedValue)
             {
@@ -43,7 +30,7 @@ namespace RLH.Plume.Factories
         }
 
         // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
-        // ~MeasurementServiceFactory()
+        // ~HighChartServiceFactory()
         // {
         //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
         //     Dispose(disposing: false);

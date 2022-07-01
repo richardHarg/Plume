@@ -1,15 +1,8 @@
-﻿using RLH.Plume.Entities;
-using RLH.Results;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RLH.Results;
 using RLH.Plume.Context;
 using Microsoft.EntityFrameworkCore;
-using RLH.Plume.Aggregates;
-using RLH.Plume.Enums;
-using RLH.Plume.Extensions;
+using RLH.Plume.Core.Entities;
+using RLH.Plume.Core.Services;
 
 namespace RLH.Plume.Services
 {
@@ -59,36 +52,6 @@ namespace RLH.Plume.Services
         }
 
 
-        public async Task<ResultOf<IMeasurementGroup>> GetGroupAsync(DateTimeOffset dateFrom,DateTimeOffset dateTo)
-        {
-            // Locate measurements within the two date ranges provided
-            var measurements = await _context.Measurements.Where(x => x.DateTimeUTC.Date >= dateFrom.Date && x.DateTimeUTC.Date <= dateTo.Date).ToListAsync();
-
-            // If no measurements have been f
-            if (measurements.Any() == false)
-            {
-                return ResultOf<IMeasurementGroup>.Error($"Measurement search from date: '{dateFrom}' to '{dateTo}' returned no results");
-            }
-
-            // Create a blank MeasurementGroup Object
-            IMeasurementGroup group;
-
-            // Check if these measurements are for a single day, if so create a new group and sort by hour/10 min 
-            if (dateFrom.Date == dateTo.Date)
-            {
-                group = new MeasurementGroup(dateFrom, measurements, Interval.DAY);
-                group.SubGroupBy(Interval.HOUR).ThenSubBy(Interval.TENMINS);
-            }
-            // Any period over a single day is set as 'range' with the from/too dates passed, measurements are grouped by day/hour
-            else
-            {
-                group = new MeasurementGroup(dateFrom,dateTo,measurements);
-                group.SubGroupBy(Interval.DAY).ThenSubBy(Interval.HOUR);
-            }
-
-            return ResultOf<IMeasurementGroup>.Success(group);
-
-        }
 
         
 

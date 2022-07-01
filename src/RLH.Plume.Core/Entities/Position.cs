@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RLH.Plume.Entities
+namespace RLH.Plume.Core.Entities
 {
     public sealed class Position
     {

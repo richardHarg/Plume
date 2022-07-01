@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RLH.Plume.Models
+namespace RLH.Plume.Core.Models
 {
     public interface IReportPeakHours
     {

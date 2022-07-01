@@ -1,38 +1,40 @@
 ﻿using Highsoft.Web.Mvc.Charts;
 using Highsoft.Web.Mvc.Charts.Rendering;
-using RLH.Plume.Aggregates;
-using RLH.Plume.Enums;
+using RLH.Plume.Core.Models;
 
 namespace RLH.Plume.HighCharts.Services
 {
     public class HighChartService : IHighChartService
     {
-        public string GetChart(IMeasurementGroup group)
+        public string GetDayChart(IDayReport dayReport)
         {
-            Highcharts options;
+            Highcharts options = GetNewChart("DAILY", $"Daily Report: {dayReport.DateTimeFrom.ToString("ddd dd MMM yyyy")}", $"Measurement Average: Hourly", "µg/m3");
 
-            switch (group.Interval)
-            {
-                case Interval.RANGE:
-                    options = GetNewChart("DATE RANGE", $"Date Range Report: {group.DateTimeFrom.ToString("ddd dd MMM yyyy")} - {group.DateTimeTo.ToString("ddd dd MMM yyyy")}", $"Measurement Average: Daily", "µg/m3");
-                    AddXAxisLabels(options, group.SubGroupedMeasurements.Select(x => x.DateTimeFrom.ToString("ddd dd MMM")));
-                    break;
-                case Interval.DAY:
-                    options = GetNewChart("DAILY", $"Daily Report: {group.DateTimeFrom.ToString("ddd dd MMM yyyy")}", $"Measurement Average: Hourly", "µg/m3");
-                    AddPMIndicatorLines(options); // ensure the threshhold lines are added to the graph
-                    AddXAxisLabels(options, group.SubGroupedMeasurements.Select(x => x.DateTimeFrom.ToString("HH:mm")));
-                    break;
-                default : throw new ArgumentOutOfRangeException(nameof(group.Interval));
-            }
+            // Add the thresholds to the chart 
+            AddPMIndicatorLines(options,dayReport.HoursOverThreshold.PM10Threshold,dayReport.HoursOverThreshold.PM25Threshold);
 
-            AddLineSeries(options,"PM 2.5", group.SubGroupedMeasurements.Select(x => x.MeanPM25Reading));
-            AddLineSeries(options, "PM 10", group.SubGroupedMeasurements.Select(x => x.MeanPM10Reading));
+            // Create the x axis labels with the hour/min shown
+            AddXAxisLabels(options, dayReport.Hours.Select(x => x.DateTimeFrom.ToString("HH:mm")));
+
+            // Add the data to the chart
+            AddLineSeries(options, "PM 2.5", dayReport.Hours.Select(x => x.MeanPM25Reading));
+            AddLineSeries(options, "PM 10", dayReport.Hours.Select(x => x.MeanPM10Reading));
 
             return new HighchartsRenderer(options).RenderHtml();
         }
+        public string GetMultiDayCharts(IMultiDayReport multiDayReport)
+        {
+            Highcharts options = GetNewChart("DATE RANGE", $"Date Range Report: {multiDayReport.DateTimeFrom.ToString("ddd dd MMM yyyy")} - {multiDayReport.DateTimeTo.ToString("ddd dd MMM yyyy")}", $"Measurement Average: Daily", "µg/m3");
 
+            // Create the x axis labels with the days showing
+            AddXAxisLabels(options, multiDayReport.Days.Select(x => x.DateTimeFrom.ToString("ddd dd MMM")));
 
+            // Add the data to the chart
+            AddLineSeries(options, "PM 2.5", multiDayReport.Days.Select(x => x.MeanPM25Reading));
+            AddLineSeries(options, "PM 10", multiDayReport.Days.Select(x => x.MeanPM10Reading));
 
+            return new HighchartsRenderer(options).RenderHtml();
+        }
 
         private Highcharts GetNewChart(string name, string title, string subTitle, string yTitle)
         {
@@ -76,7 +78,6 @@ namespace RLH.Plume.HighCharts.Services
                 Series = new List<Series>()
             };
         }
-
         private void AddLineSeries(Highcharts chartOptions, string name, IEnumerable<double> values, PlotOptionsLine lineOptions = null)
         {
             chartOptions.PlotOptions.Line = lineOptions == null ? new PlotOptionsLine() : lineOptions;
@@ -94,7 +95,7 @@ namespace RLH.Plume.HighCharts.Services
                 Categories = xValues.ToList()
             });
         }
-        private void AddPMIndicatorLines(Highcharts chartOptions)
+        private void AddPMIndicatorLines(Highcharts chartOptions,int pm10Threshold,int pm25Threshold)
         {
             chartOptions.YAxis.First().PlotLines = new List<YAxisPlotLines>()
              {
@@ -107,7 +108,7 @@ namespace RLH.Plume.HighCharts.Services
                                 {
                                     Text = "PM 2.5 - Moderate"
                                 },
-                                Value = 35
+                                Value = pm25Threshold
                             },
                             new YAxisPlotLines()
                             {
@@ -118,8 +119,9 @@ namespace RLH.Plume.HighCharts.Services
                                 {
                                     Text = "PM 10 - Moderate / PM 2.5 High"
                                 },
-                                Value = 50
-                            },
+                                Value = pm10Threshold
+                            }
+                            /*,
 
                             new YAxisPlotLines()
                             {
@@ -133,6 +135,7 @@ namespace RLH.Plume.HighCharts.Services
                                 Value = 76
 
                             }
+                            */
              };
 
         }

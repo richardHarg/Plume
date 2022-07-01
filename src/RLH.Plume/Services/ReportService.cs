@@ -1,11 +1,9 @@
-﻿using RLH.Plume.Entities;
+﻿
 using RLH.Plume.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RLH.Plume.Extensions;
+using RLH.Plume.Core.Models;
+using RLH.Plume.Core.Entities;
+using RLH.Plume.Core.Services;
 
 namespace RLH.Plume.Services
 {
@@ -125,7 +123,9 @@ namespace RLH.Plume.Services
                     PM10HoursOverThreshold = PM10HoursOver,
                     PM10HoursOverThresholdCount = PM10HoursOverCount,
                     PM25HoursOverThreshold = PM25HoursOver,
-                    PM25HoursOverThresholdCount = PM25HoursOverCount
+                    PM25HoursOverThresholdCount = PM25HoursOverCount,
+                    PM10Threshold = PM10HourlyThreshold,
+                    PM25Threshold = PM25HourlyThreshold
                 },
                 Hours = hours
             };

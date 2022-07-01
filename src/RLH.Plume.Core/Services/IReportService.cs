@@ -1,12 +1,7 @@
-﻿using RLH.Plume.Entities;
-using RLH.Plume.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RLH.Plume.Core.Entities;
+using RLH.Plume.Core.Models;
 
-namespace RLH.Plume.Services
+namespace RLH.Plume.Core.Services
 {
     public interface IReportService
     {
