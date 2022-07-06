@@ -12,6 +12,10 @@ namespace RLH.Plume.Services
 
         public IDayReport GenerateDailyReport(DateTime Date,IEnumerable<Measurement> measurements, int PM10HourlyThreshold = 50, int PM25HourlyThreshold = 35)
         {
+            // Feels like this needs a re-work as its all one big method...however because the looping is gathering values/counts at several layers (totals and groups)
+            // Its not that clear how it could be made cleaner without passing a tonne of values around which, franky doesnt seem any better than the below...
+
+
             // Check if there are NO measurments passed for this day
 
             // **** Should I also be checking for days when the number of values falls below an acceptable threshold? 

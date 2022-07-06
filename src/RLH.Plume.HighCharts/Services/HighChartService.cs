@@ -22,9 +22,9 @@ namespace RLH.Plume.HighCharts.Services
 
             return new HighchartsRenderer(options).RenderHtml();
         }
-        public string GetMultiDayCharts(IMultiDayReport multiDayReport)
+        public string GetMultiDayChart(IMultiDayReport multiDayReport)
         {
-            Highcharts options = GetNewChart("DATE RANGE", $"Date Range Report: {multiDayReport.DateTimeFrom.ToString("ddd dd MMM yyyy")} - {multiDayReport.DateTimeTo.ToString("ddd dd MMM yyyy")}", $"Measurement Average: Daily", "µg/m3");
+            Highcharts options = GetNewChart("DATERANGE", $"Date Range Report: {multiDayReport.DateTimeFrom.ToString("ddd dd MMM yyyy")} - {multiDayReport.DateTimeTo.ToString("ddd dd MMM yyyy")}", $"Measurement Average: Daily", "µg/m3");
 
             // Create the x axis labels with the days showing
             AddXAxisLabels(options, multiDayReport.Days.Select(x => x.DateTimeFrom.ToString("ddd dd MMM")));

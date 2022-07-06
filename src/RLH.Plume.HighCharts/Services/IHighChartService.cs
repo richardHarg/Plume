@@ -6,6 +6,6 @@ namespace RLH.Plume.HighCharts.Services
     {
         public string GetDayChart(IDayReport dayReport);
 
-        public string GetMultiDayCharts(IMultiDayReport multiDayReport);
+        public string GetMultiDayChart(IMultiDayReport multiDayReport);
     }
 }
